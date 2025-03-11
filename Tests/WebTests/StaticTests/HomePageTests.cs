@@ -6,7 +6,7 @@ using OrumAutomation.Helpers;
 
 namespace OrumAutomation.Tests.WebTests.StaticTests
 {
-	[Parallelizable(ParallelScope.Fixtures)]
+	[Parallelizable(ParallelScope.None)]
 	[Author("Raymond Dasilva", "raymond.dasilva@outlook.com")]
 	public class StaticOrumTest : BaseTest
 	{

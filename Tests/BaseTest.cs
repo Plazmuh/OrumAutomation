@@ -24,7 +24,11 @@ namespace OrumAutomation.Tests
 		[SetUp]
 		public void CreateDriver()
 		{
-			// With Selenium 4.6+, this triggers Selenium Manager to fetch the correct ChromeDriver.
+			// RD: Researched some recommended options to run the Driver with in a Container Env (like GH CI) and other options.
+			var options = new ChromeOptions();
+			options.AddArgument("--headless");                // RD: Runs without UI
+			options.AddArgument("--no-sandbox");             // RD: Needed in container environments
+			options.AddArgument("--disable-dev-shm-usage");  // RD: Overcome limited /dev/shm space, this might help some.										 
 			Driver = new ChromeDriver();
 		}
 

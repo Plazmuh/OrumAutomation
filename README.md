@@ -28,3 +28,10 @@ Solution: Update your Chrome Version in Settings (AND RELAUNCH Chrome).
 
 Solution Explained: I've taken many steps to let this be plug and play for anyone in Orum cloning the repo, like using a base
 Selenium IWebDriver, which takes care of incompatibilities between your environment and Chrome/FireFox. But this error could still come up if you are either too behind, or on an incompatible version that would have needed a direct download.
+
+--------------------------------------------------------------------------------------------------------------------------
+
+CI 
+
+Included is a workflow yml that will ensure all tests are passing for every PR submitted. This should happen for any commit, but the individual
+tests can be rerun manually if necessary.

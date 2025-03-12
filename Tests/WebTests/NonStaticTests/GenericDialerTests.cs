@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace OrumAutomation.Tests.WebTests.NonStaticTests
 {
-	[Parallelizable(ParallelScope.Fixtures)]
 	[Author("Raymond Dasilva", "raymond.dasilva@outlook.com")]
 	public class GenericDialerTests : BaseTest
 	{

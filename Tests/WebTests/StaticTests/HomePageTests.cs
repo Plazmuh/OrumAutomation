@@ -1,26 +1,21 @@
-﻿using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OrumAutomation.Helpers.PageObjects;
 using OrumAutomation.Helpers;
 
 namespace OrumAutomation.Tests.WebTests.StaticTests
 {
-	[Parallelizable(ParallelScope.None)]
 	[Author("Raymond Dasilva", "raymond.dasilva@outlook.com")]
+	[NonParallelizable] // RD: We need this to be run sequentially for the CI containers it runs on.
 	public class StaticOrumTest : BaseTest
 	{
-		/// <summary>
-		/// Starts every Test on the HomePage, since that is what this folder is for.
-		/// </summary>
-		/// <returns></returns>
 		[SetUp]
 		public async Task BeforeEachTest()
 		{
 			try
 			{
-				var Page = new OrumHomePage(Driver);
-				await Page.GoToHomePage().ConfigureAwait(false);
+				// RD: Navigate to the homepage at the start of each test.
+				var page = new OrumHomePage(Driver);
+				await page.GoToHomePage().ConfigureAwait(false);
 			}
 			catch (Exception exception)
 			{
@@ -28,32 +23,35 @@ namespace OrumAutomation.Tests.WebTests.StaticTests
 			}
 		}
 
-		#region Test Cases
+		#region Test Case
+
 		/// <summary>
-		/// Test: Go through a few different pages and make sure elements are visible
+		/// TEST: Homepage loads successfully.
 		/// </summary>
-		/// <returns></returns>
 		[Test, Order(1)]
 		public void OrumHomePageIsAccessible()
 		{
-			// If we made it here, our base test and homepage passed, let's mark that.
+			// RD: If we reached here, the homepage loaded successfully.
 			Assert.Pass();
 		}
 
+		/// <summary>
+		/// TEST: Homepage contains the sign in button, and is visible.
+		/// </summary>
+		/// <returns></returns>
 		[Test, Order(2)]
 		public async Task OrumHomePageSignInButtonAsync()
 		{
-			// Are we able to see the sign in page or is it down?
+			// Interact with the Sign-In button.
 			var elem = ElementUtility.GetElement(Driver, By.CssSelector("#__next > header > div.mx-auto.flex.min-h-\\[4rem\\].w-full.max-w-\\[1310px\\].items-center.justify-between.px-\\[15px\\] > div.hidden.lg\\:flex.z-\\[10\\].items-center.gap-\\[30px\\] > a.t-15.font-medium.leading-\\[1\\.2\\].false"), 60);
 			elem.Click();
 			await ElementUtility.PauseAsync(3000).ConfigureAwait(false);
 
-			// Test Passed.
 			Assert.Pass();
 		}
 
 		/// <summary>
-		/// Simulates multiple pages for a user in the homepage.
+		/// TEST: Simulates multiple page interactions for a user in the homepage.
 		/// </summary>
 		/// <returns></returns>
 		[Test, Order(3)]
